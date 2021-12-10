@@ -1,4 +1,18 @@
 @charset "UTF-8";
+
+.parallax-scrolling{
+  /* The image used */
+  background-image: url("../img/olivia-bliss-HTnycx0h_kk-unsplash1900x1267.jpg");
+
+  /* Set a specific height */
+  min-height: 500px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 /*!
 * Start Bootstrap - Creative v7.0.5 (https://startbootstrap.com/theme/creative)
 * Copyright 2013-2021 Start Bootstrap
