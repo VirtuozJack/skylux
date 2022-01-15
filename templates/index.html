@@ -18,6 +18,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+
+        <script src="https://instagram-web-auth.firebaseapp.com/instauth.min.js"></script>
+
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -171,8 +174,40 @@
         <!-- Call to action-->
         <section class="page-section bg-dark text-white">
             <div class="container px-4 px-lg-5 text-center">
-                <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
-                <a class="btn btn-light btn-xl" href="https://startbootstrap.com/theme/creative/">Download Now!</a>
+                <!-- API -->
+                <div class="">        
+                    <h1>Pogoda:</h1>           
+                    <h3>Na zewnatrz jest <span class="text-primary">{{ data['main']['temp'] }}</span>  stopni Celsjusza. </h3>       
+                    <h3><i class="bi bi-thermometer-half"></i> Odczuwalna temperatura <span class="text-primary">{{ data['main']['feels_like'] }}</span> stopni Celsjusza.</h3>
+                    <h3><i class="bi bi-cloudy"></i> {{ data['weather'][0]['description'] | upper }}</h3>
+                    <h3><i class="bi bi-wind"></i> Predkosc wiatru: <span class="text-primary">{{ data['wind']['speed'] }}</span> km/h </h3>
+                    <h3><i class="bi bi-compass"></i>
+                        Kierunek wiatru: 
+                        
+                        {% if data['wind']['deg'] == 0 or data['wind']['deg'] == 360 %}
+                        <span class="text-primary">N</span>
+                        {% elif data['wind']['deg'] == 90 %}
+                        <span class="text-primary">E</span>
+                        {% elif data['wind']['deg'] == 180 %}
+                        <span class="text-primary">S</span>
+                        {% elif data['wind']['deg'] == 270 %}
+                        <span class="text-primary">W</span>
+                        {% elif data['wind']['deg'] > 0 and data['wind']['deg'] < 90  %}
+                        <span class="text-primary">NE</span>
+                        {% elif data['wind']['deg'] > 90 and data['wind']['deg'] < 180  %}
+                        <span class="text-primary">SE</span> 
+                        {% elif data['wind']['deg'] > 180 and data['wind']['deg'] < 270  %}
+                        <span class="text-primary">SW</span>
+                        {% elif data['wind']['deg'] > 270 and data['wind']['deg'] < 360  %}
+                        <span class="text-primary">NW</span>                        
+                        {% endif %}
+
+                    </h3>
+
+                </div>
+                <!-- API END -->
+                <!-- <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
+                <a class="btn btn-light btn-xl" href="https://startbootstrap.com/theme/creative/">Download Now!</a> -->
             </div>
         </section>
         <!-- Contact-->
@@ -251,8 +286,7 @@
                     </div>
                 </div>
                 <div>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29578.546182647337!2d16.05335319191266!3d52.64903785576199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4706a26324a2655b%3A0x8fcc0a7eba027d8c!2sMuzeum%20Zamek%20Opali%C5%84skich%20w%20Sierakowie!5e0!3m2!1spl!2spl!4v1639162614470!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d159938.90168177875!2d22.42368538730581!3d51.21824044052299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472257141e154061%3A0x5528ee7af6e8e95f!2sLublin!5e0!3m2!1spl!2spl!4v1642191884937!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>                </div>
             </div>
         </section>
         <!-- Footer-->
@@ -287,5 +321,9 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+        <script>
+        window.InstAuth.init(your_client_id_from_instagram_console);
+        </script>
     </body>
 </html>
